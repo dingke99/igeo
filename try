@@ -1,0 +1,22 @@
+try:
+    odbcreatefile()
+except:
+    driver.find_element(By.ID,"O365_MainLink_NavMenu").click()
+    wait.until(EC.visibility_of_element_located((By.ID, 'O365_AppTile_Documents'))).click()
+    handles = driver.window_handles
+    driver.switch_to.window(handles[2])
+    wait.until(EC.visibility_of_element_located((By.ID, 'OneDriveFirstRunNextButton'))).click()
+    time.sleep(5)
+    driver.switch_to.window(handles[1])
+    driver.find_elements(By.XPATH,"//span[text()='登录']/..")[1].click()
+    handles = driver.window_handles
+    last_handle = handles[-1]
+    driver.switch_to.window(last_handle)
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//small[text()='已登录']/.."))).click()
+    
+    handles = driver.window_handles
+    driver.switch_to.window(handles[1])
+    
+    odbcreatefile()
+
+time.sleep(10)
